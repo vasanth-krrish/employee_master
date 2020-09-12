@@ -10,6 +10,7 @@ class EmployeesController < ApplicationController
   # GET /employees.json
   def index
     @employees = Employee.all
+    @search_by = SearchBy.new
   end
 
   # GET /employees/1

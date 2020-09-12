@@ -1,0 +1,18 @@
+<% content_for :page_title, "Home" %>
+
+<nav class="panel is-info">
+  <p class="panel-heading">
+    Employees
+  </p>
+  <div class="panel-block">
+    <p class="subtitle">Searched for <%= params[:id] %> skill</p>
+  </div>
+  <div class="panel-block">
+    <%= form_for(@search_by) do |f| %>
+      <%= f.select :skill, Skill.all.collect {|p| [p.name]}, prompt: "Select a skill" %>
+      <%= f.select :degree, Degree.all.collect {|p| [p.name]}, prompt: "Select a degree" %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </div>
+  <%= render 'employee', emps: @emps %>
+</nav>

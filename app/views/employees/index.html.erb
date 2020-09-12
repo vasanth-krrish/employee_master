@@ -4,6 +4,13 @@
   <p class="panel-heading">
     Employees
   </p>
+  <div class="panel-block">
+    <%= form_for(@search_by) do |f| %>
+      <%= f.select :skill, Skill.all.collect {|p| [p.name]}, prompt: "Select a skill" %>
+      <%= f.select :degree, Degree.all.collect {|p| [p.name]}, prompt: "Select a degree" %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </div>
   <% @employees.each do |employee| %>
     <div class="panel-block" id="emp<%= employee.id %>">
       <div class="media">

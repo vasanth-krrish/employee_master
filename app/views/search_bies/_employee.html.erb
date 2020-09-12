@@ -1,0 +1,46 @@
+<% emps.each do |employee| %>
+  <div class="panel-block" id="emp<%= employee.id %>">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-128x128">
+          <% if employee.photo.attached? %>
+            <%= image_tag employee.photo, style: 'height:128px;width:128px;' %>
+          <% else %>
+            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Placeholder image">
+          <% end %>
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4"><%= employee.name %></p>
+        <div class="subtitle is-6"><%= employee.email %><br><%= employee.department %><br><br>
+          <div class="fields is-grouped">
+            <%= link_to employee_path(employee) do %>
+              <button class="button is-link">
+                <span class="icon">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </span>
+                <span>Show</span>
+              </button>
+            <% end %>
+            <%= link_to edit_employee_path(employee), class: "control" do %>
+              <button class="button is-primary">
+                <span class="icon">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </span>
+                <span>Edit</span>
+              </button>
+            <% end %>
+            <%= link_to employee_path(employee), method: :delete, data: {confirm: "Are you sure you want to delete?", class: "control delete"}, remote: true do %>
+              <button class="button is-danger">
+                <span class="icon">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </span>
+                <span>Delete</span>
+              </button>
+            <% end %><br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
