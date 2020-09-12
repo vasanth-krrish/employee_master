@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Step 1 
 
-Things you may want to cover:
+Clone the project 
 
-* Ruby version
+git clone https://github.com/vasanth-krrish/employee_master
 
-* System dependencies
+Step 2
 
-* Configuration
+Run bundle to install all required gems
 
-* Database creation
+bundle
 
-* Database initialization
+Step 3
 
-* How to run the test suite
+Create database for the project. This project uses Postgresql
 
-* Services (job queues, cache servers, search engines, etc.)
+rails db:create
 
-* Deployment instructions
+Step 4
 
-* ...
+Migrate the database
+
+rails db:migrate
+
+Step 5
+
+Seed the data into database
+
+rails db:seed
+
+Step 6
+
+Install jquery
+
+yarn install jquery
+
+Step 7
+
+Run server with
+
+rails s
