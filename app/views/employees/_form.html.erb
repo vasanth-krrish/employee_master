@@ -1,0 +1,150 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+  $('#new_form').validate();
+})
+</script>
+
+<%= form_with(model: employee, local: true, id: 'new_form') do |form| %>
+  <% if employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Employee</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control is-expanded has-icons-left">
+          <%= form.text_field :name, class: 'input', placeholder: "Name", required: true %>
+          <span class="icon is-small is-left">
+            <i class="fa fa-user"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control is-expanded has-icons-left">
+          <%= form.email_field :email, class: 'input', placeholder: "Email", required: true %>
+          <span class="icon is-small is-left">
+            <i class="fa fa-envelope"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Photo</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control is-expanded">
+          <%= form.file_field :photo, class: 'input' %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Department</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control is-expanded">
+          <%= form.text_field :department, class: 'input', required: true %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Gender</label>
+    </div>
+    <div class="field-body">
+      <div class="field is-narrow">
+        <div class="control">
+          <label class="radio">
+            <%= form.radio_button :gender, "Male", required: true %>
+            Male
+          </label>
+          <label class="radio">
+            <%= form.radio_button :gender, "Female", required: true %>
+            Female
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Joining Date</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control is-expanded">
+          <%= form.date_field :joining_date, class: 'input', required: true %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Salary</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control is-expanded">
+          <%= form.number_field :salary, class: 'input' %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Degree</label>
+    </div>
+    <div class="field-body">
+    <div class="field is-narrow">
+      <div class="control">
+        <div class="select is-fullwidth">
+          <%= form.select :degree, Degree.all.collect {|p| [p.name]}, prompt: "Select a degree", required: true  %>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="field is-horizontal">
+  <div class="field-label">
+    <!-- Left empty for spacing -->
+  </div>
+  <div class="field-body">
+    <div class="fields is-grouped">
+      <div class="control">
+        <%= form.submit class: 'button is-info' %>
+        <%= link_to :back, class: 'button is-light' do %>
+          Back
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="actions">
+
+  </div>
+<% end %>

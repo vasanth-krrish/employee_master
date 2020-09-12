@@ -1,0 +1,26 @@
+<%= form_with(model: employee_skill, local: true) do |form| %>
+  <% if employee_skill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee_skill.errors.count, "error") %> prohibited this employee_skill from being saved:</h2>
+
+      <ul>
+      <% employee_skill.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :employee_id, value: params[:id] %>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <div class="select">
+        <%= form.select :skill_id, Skill.all.collect {|p| [p.name,p.id]}, prompt: "Select a skill", required: true %>
+      </div>
+    </div>
+    <div class="control">
+      <%= form.submit "Add Skill", class: 'button is-info' %>
+    </div>
+  </div>
+<% end %>

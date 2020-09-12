@@ -1,0 +1,135 @@
+<% content_for :page_title, "Employee - "<<@employee.name %>
+
+<div class="columns">
+  <div class="column is-6 is-offset-3">
+    <div class="card">
+      <div class="card-content">
+
+        <% if @employee.photo.attached? %>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+          </div>
+          <div class="field-body">
+              <figure class="image is-128x128">
+                <%= image_tag @employee.photo, style: 'height:128px;width:128px;' %>
+              </figure>
+          </div>
+        </div>
+        <% end %>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Name</label>
+          </div>
+          <div class="field-body">
+            <p class="control is-size-4 has-text-weight-light">
+              <%= @employee.name %>
+            </p>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Email</label>
+          </div>
+          <div class="field-body">
+            <p class="control is-size-4 has-text-weight-light">
+              <%= @employee.email %>
+            </p>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Department</label>
+          </div>
+          <div class="field-body">
+            <p class="control is-size-4 has-text-weight-light">
+              <%= @employee.department %>
+            </p>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Gender</label>
+          </div>
+          <div class="field-body">
+            <p class="control is-size-4 has-text-weight-light">
+              <%= @employee.gender %>
+            </p>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Joining Date</label>
+          </div>
+          <div class="field-body">
+            <p class="control is-size-4 has-text-weight-light">
+              <%= @employee.joining_date %>
+            </p>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Salary</label>
+          </div>
+          <div class="field-body">
+            <p class="control is-size-4 has-text-weight-light">
+              <%= @employee.salary %>
+            </p>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Degree</label>
+          </div>
+          <div class="field-body">
+            <p class="control is-size-4 has-text-weight-light">
+              <%= @employee.degree %>
+            </p>
+          </div>
+        </div>
+
+        <% @employee.skills.each do |skill| %>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Skill</label>
+            </div>
+            <div class="field-body">
+              <div class="control is-size-4 has-text-weight-light">
+                <%= skill.name %>
+                <% employee_skill = EmployeeSkill.find_by(employee_id: @employee.id, skill_id: skill.id) %>
+                <%= link_to employee_skill, method: :delete, data: {confirm: "Are you sure?"} do %>
+                  <i class="fa fa-times" aria-hidden="true" style="color:red;"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label"></label>
+          </div>
+          <div class="field-body">
+            <div class="control" id="new-skill">
+              <%= link_to "Add Skill", new_employee_skill_path(@employee.id), class: 'button is-primary', remote: true %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="card-footer">
+        <a href="<%= edit_employee_path(@employee) %>" class="card-footer-item">Edit</a>
+        <%= link_to @employee, method: :delete, data: {confirm: "Are you sure?"}, class: "card-footer-item" do %>
+          Delete
+        <% end %>
+      </footer>
+    </div>
+  </div>
+</div>
